@@ -1,9 +1,9 @@
-const express = reqiure('expresss');
-let mysql = require('mysql2')
+const express = require('express');
+let mysql = require('mysql2');
 const app = express();
 const PORT = 3000;
 app.use(express.json());
-app.use(express.urleancoded({extended: true }));
+app.use(express.urlencoded({extended: true }));
 
 app.get('/',(req,res) => {
     res.send ("Hello World")
@@ -47,10 +47,10 @@ app.get('/api/users', (req,res) => {
 app.post('/api/users', (req, res) =>{
     const { nama, nim, kelas} = req.body;
 
-    if (!nama ||nim ||kelas) {
-        return res.status(400).json({ message: 'nama, nim, kelas wajib diisi'});
+    if (!nama ||!nim ||!kelas) {
+         return res.status(400).json({ message: 'nama, nim, kelas wajib diisi'});
     }
-
+    
     db.query(
         
         'INSERT INTO mahasiswa (nama, nim ,kelas) VALUES (?, ?, ?)',
