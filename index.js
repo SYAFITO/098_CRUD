@@ -51,7 +51,19 @@ app.post('/api/users', (req, res) =>{
         return res.status(400).json({ message: 'nama, nim, kelas wajib diisi'});
     }
 
-   
+    db.query(
+        
+        'INSERT INTO mahasiswa (nama, nim ,kelas) VALUES (?, ?, ?)',
+        [nama, nim, kelas],
+        (err, results) => {
+            if(err) {
+                console.error(err);
+                return res.status(500).json({message: 'Database Error'});
+            }
+
+            res.status(201).json({ message: 'User created successfully'});
+        }
+    );
 });
 
 
